@@ -51,14 +51,18 @@
       margin-bottom: 4rem;
     }
 
-    .content h1 {
+    .content h1,
+    .content h2,
+    .content h3,
+    .content h4 {
       color: #1a3a70;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .content p {
       color: #333;
       line-height: 1.7;
+      margin-bottom: 1rem;
     }
 
     .content img {
@@ -67,6 +71,27 @@
       display: block;
       margin: 1rem 0;
       border-radius: 8px;
+    }
+
+    .content video {
+      display: block;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+
+    .content ul, .content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.2rem;
+    }
+
+    .content li {
+      margin-bottom: 0.5rem;
+    }
+
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -84,119 +109,67 @@
   </aside>
 
   <main class="content">
+    <!-- About Section -->
     <section id="about">
       <h1>About This Project</h1>
-      <p>
-        Motivation: AMRs cannot adapt well to existing warehouses, resulting in sub-optimal performance in mixed-use environments where automated and manual operations must coexist.
-        A dedicated supervisor is required to troubleshoot disengagement. This project will retrofit existing drive-by-wire electric forklifts to enable gradual adoption from manual to up to 60% autonomous operation.
-        We are going to approach this problem in three steps.
-      </p>
-      <p>
-        Our answer is to build on existing platforms using an infrastructure-based computer vision system. This system guides fleets of forklifts for end-to-end cross-dock operations using a bird's-eye view.
-        The cameras are mounted on ceilings.
-      </p>
-      <p>
-        Below is an overview of our solution:
-      </p>
+      <p>Motivation: AMRs cannot adapt well to existing warehouses, resulting in sub-optimal performance in mixed-use environments where automated and manual operations must coexist. A dedicated supervisor is required to troubleshoot disengagement. This project will retrofit existing drive-by-wire electric forklifts to enable gradual adoption from manual to up to 60% autonomous operation. We are going to approach this problem in three steps.</p>
+      <p>Our answer is to build on existing platforms using an infrastructure-based computer vision system. This system guides fleets of forklifts for end-to-end cross-dock operations using a bird's-eye view. The cameras are mounted on ceilings.</p>
+      <p>Below is an overview of our solution:</p>
       <img src="./retrolift/solution.png" alt="Solution Overview">
 
-      <p>
-        The diagram below shows a working pipeline:
-      </p>
+      <p>The diagram below shows a working pipeline:</p>
       <img src="./retrolift/pipeline.png" alt="Pipeline Diagram">
 
-      <p>
-        NVIDIA Isaac Sim provides an environment to develop and test a vision-based localization system before deploying it in the real world.
-        The workflow involves detecting forklifts within video streams, localizing the forklifts based on detection information, and replicating the setup in a real environment (after camera calibration and testing).
-        The project is divided into several sections, each focusing on a specific aspect of the system.
-      </p>
-      <p>
-        This will be expanded in the future sections. We first start with the basics: how to set up the camera.
-      </p>
+      <p>NVIDIA Isaac Sim provides an environment to develop and test a vision-based localization system before deploying it in the real world. The workflow involves detecting forklifts within video streams, localizing the forklifts based on detection information, and replicating the setup in a real environment (after camera calibration and testing). The project is divided into several sections, each focusing on a specific aspect of the system.</p>
+      <p>This will be expanded in the future sections. We first start with the basics: how to set up the camera.</p>
     </section>
 
+    <!-- Camera Setup Section -->
     <section id="camera">
       <h1>Camera Setup</h1>
-      <p>
-        We have four cameras with the following specifications (for full details, please refer to the product page): 
-        <a href="https://www.baslerweb.com/en-us/shop/a2a1920-51gcpro/" target="_blank">Basler A2A1920-51gcPRO</a>.
-      </p>
-      <p>
-        <strong>Specifications:</strong><br>
-        Resolution (H × V): 1920 px × 1200 px<br>
-        Resolution (MP): 2.3 MP<br>
-        Pixel Size (H × V): 3.45 μm × 3.45 μm
-      </p>
-      <p>
-        Each camera connects to a port on the TP-Link 5-Port Gigabit Easy Smart Switch with 4-Port PoE+ using a 4-meter Ethernet cable. 
-        The switch includes a USB port to connect the network to the computer (in our case, an ASUS desktop) and is powered by a dedicated power supply.
-        Refer to the images below to locate and connect all components. Once identified, position each camera on a tripod or ceiling mount as needed.
-      </p>
-      <p>
-        Make the connections as shown in the picture. The blue cable connects the camera to the switch, and the white cable connects the switch to the computer. 
-        The power cable for the Ethernet switch is labeled <em>“Retrolifts POE”</em>. Connect the power cable and switch the device on.
-      </p>
-    
-      <!-- insert pictures -->
+      <p>We have four cameras with the following specifications (for full details, please refer to the product page): <a href="https://www.baslerweb.com/en-us/shop/a2a1920-51gcpro/" target="_blank">Basler A2A1920-51gcPRO</a>.</p>
+      <p><strong>Specifications:</strong><br>
+      Resolution (H × V): 1920 px × 1200 px<br>
+      Resolution (MP): 2.3 MP<br>
+      Pixel Size (H × V): 3.45 μm × 3.45 μm</p>
+
+      <p>Each camera connects to a port on the TP-Link 5-Port Gigabit Easy Smart Switch with 4-Port PoE+ using a 4-meter Ethernet cable. The switch includes a USB port to connect the network to the computer (in our case, an ASUS desktop) and is powered by a dedicated power supply. Refer to the images below to locate and connect all components. Once identified, position each camera on a tripod or ceiling mount as needed.</p>
+
+      <p>Make the connections as shown in the picture. The blue cable connects the camera to the switch, and the white cable connects the switch to the computer. The power cable for the Ethernet switch is labeled <em>“Retrolifts POE”</em>. Connect the power cable and switch the device on.</p>
+
       <img src="retrolift/ethernet_switch.jpg" alt="Ethernet Switch">
-    
-      <p>
-        Mount each camera securely on a tripod or ceiling mount as shown below.
-      </p>
-    
+      <p>Mount each camera securely on a tripod or ceiling mount as shown below.</p>
       <img src="retrolift/camera_setup.jpg" alt="Camera Setup">
-    
-      <p>
-        Once all cameras are mounted and connected, open the Pylon Viewer software. 
-        A short GIF is included to demonstrate how to power on the system and optimize the bandwidth settings.
-        The computer-to-switch connection supports up to 125 MBps, and each individual port also supports up to 125 MBps.
-        Therefore, when using all four cameras simultaneously, adjust the bandwidth allocation in the Pylon Viewer software, accordingly—for example, 30 Mbps per camera (it usually does this automatically once we press the start button).
-      </p>
-      <p>
-        Adjust the aperture and focus for each camera as needed. Once setup is complete, run the script (<em>insert script name</em>) and follow the README instructions to perform the calibration.
-      </p>
-      <p>
-        Below is the ChArUco board used for camera calibration:
-      </p>
+
+      <p>Once all cameras are mounted and connected, open the Pylon Viewer software. A short GIF is included to demonstrate how to power on the system and optimize the bandwidth settings. The computer-to-switch connection supports up to 125 MBps, and each individual port also supports up to 125 MBps. Therefore, when using all four cameras simultaneously, adjust the bandwidth allocation accordingly — for example, 30 Mbps per camera.</p>
+
+      <p>Adjust the aperture and focus for each camera as needed. Once setup is complete, run the script (<em>insert script name</em>) and follow the README instructions to perform the calibration.</p>
+
+      <p>Below is the ChArUco board used for camera calibration:</p>
       <img src="retrolift/charuco.png" alt="ChArUco Board">
-    
-      <p>
-        The following subsection explains how to perform the camera calibration.<br>
-        <strong>1.1 Camera Calibration:</strong>
-      </p>
-      
+
+      <h2>1.1 Camera Calibration</h2>
       <ul>
         <li>On the ASUS desktop or in the GitHub repository, navigate to the README file: {insert link here}.</li>
-        <li>Run the script to capture videos. While capturing data move the ChArUco board. Pass this video to the python script to extract frames. Set the frame interval accordingly.</li>
+        <li>Run the script to capture videos. While capturing data, move the ChArUco board. Pass this video to the Python script to extract frames. Set the frame interval accordingly.</li>
         <li>Locate the folder where these images are saved and provide this folder path to the calibration script.</li>
         <li>Ensure that each camera is properly calibrated. Follow the README documentation carefully.</li>
         <li>For the theoretical background, refer to the OpenCV ArUco documentation: <a href="https://docs.opencv.org/4.x/d5/dae/tutorial_aruco_detection.html" target="_blank">OpenCV documentation</a>.</li>
         <li>To learn how to use a ChArUco board with OpenCV, see this guide: <a href="https://medium.com/@ed.twomey1/using-charuco-boards-in-opencv-237d8bc9e40d" target="_blank">Using ChArUco Boards in OpenCV</a>.</li>
       </ul>
 
-      <p>
-        <strong>1.2 AprilTag Detection:</strong>
-    
-      </p>
-
+      <h2>1.2 AprilTag Detection</h2>
       <ul>
-        Follow the ReadME file to run the AprilTag detection script.
+        <li>Follow the README file to run the AprilTag detection script.</li>
       </ul>
 
-
-      <!-- some important notes -->
-      <p>
-        <strong>Important Notes:</strong>
-        <ul>
-          <li>If the camera is being accessed by Pylon Viewer, it cannot be accessed by scripts at the same time. Close one of them to run the camera.</li>
-          <li>If the first script runs successfully that would mean the camera is in focus.</li>
-          <li>Incase you want to use a different ChArUco board in the future define it in the script. It is hardcoded right now.</li>
-        </ul>
-
-
+      <h3>Important Notes</h3>
+      <ul>
+        <li>If the camera is being accessed by Pylon Viewer, it cannot be accessed by scripts at the same time. Close one of them to run the camera.</li>
+        <li>If the first script runs successfully, that means the camera is in focus.</li>
+        <li>If you want to use a different ChArUco board in the future, define it in the script. It is hardcoded right now.</li>
+      </ul>
     </section>
-    
-
 
 
 
@@ -216,7 +189,7 @@
         (e.g., cereal boxes, mugs) with varying shapes and sizes. The system jointly detects and tracks an object’s 3D position, orientation, and relative dimensions over time.
       </p>
     
-      <p><strong>Key contributions:</strong></p>
+      <h2>Key Contributions</h2>
       <ul>
         <li>Uses a <strong>keypoint-based representation</strong>: a deep network predicts 2D image coordinates of the 3D cuboid’s corners (keypoints) along with their uncertainties.</li>
         <li>Introduces a <strong>tracklet-conditioned network</strong> that uses the previous frame’s prediction and uncertainty heatmaps as input, improving temporal consistency.</li>
@@ -228,7 +201,6 @@
       <h2>How to Run the CenterPose Model</h2>
       <ol>
         <li>Go to the CenterPose folder in your Documents, or clone the repository if you haven’t already.</li>
-        <!-- Example: <code>git clone https://github.com/NVlabs/CenterPose.git</code> -->
         <li>Open the <code>notex.txt</code> file. This file serves as the key guide for running the repository.</li>
         <li>Run line 2 in the inference section. A screenshot is provided for reference below:</li>
       </ol>
@@ -240,9 +212,7 @@
         <li>The results are saved in the <code>inf_results</code> folder. Note: check <code>input_files</code> inside <code>inference</code>. (The purpose of the <code>outputs</code> folder outside <code>inference</code> is currently unclear.)</li>
       </ol>
     
-      <p>
-        A typical detection output looks like this:
-      </p>
+      <p>A typical detection output looks like this:</p>
       <img src="retrolift/000000_out_img_pred.png" alt="CenterPose Output">
     
       <h2>Important Notes</h2>
@@ -250,37 +220,23 @@
         <li>Check the JSON file in <code>inference/results</code>. If the <code>kps_displacement_mean</code> has a value, it indicates that the object (e.g., forklift) was recognized and the value is stored in the matrix. The value is the center of the base of the box detected.</li>
         <li>The current model was trained on synthetic data generated using NVIDIA’s Replicator. The ground truth of every forklift must be known.</li>
         <li>The tracking component described in the paper was not implemented in this setup.</li>
-        <li> As the model is not trained on objects that are far away, it might not be the best solution.</li>
+        <li>As the model is not trained on objects that are far away, it might not be the best solution.</li>
       </ul>
     
       <h2>Performance on the Retrolifts Dataset</h2>
-      <p>
-        This report — <a href="https://docs.google.com/document/d/15rteuPFY45iXWRHcHasuSMUGSRGU74XH/edit" target="_blank">View Report</a> — contains detailed results of running the CenterPose model on the Retrolifts dataset.
-      </p>
-      <p>
-        In summary, the Retrolift object was detected well at certain angles but poorly at others. For example:
-      </p>
+      <p>This report — <a href="https://docs.google.com/document/d/15rteuPFY45iXWRHcHasuSMUGSRGU74XH/edit" target="_blank">View Report</a> — contains detailed results of running the CenterPose model on the Retrolifts dataset.</p>
+      <p>In summary, the Retrolift object was detected well at certain angles but poorly at others. For example:</p>
     
-      <p>
-        <strong>At 0 degrees:</strong> the model detected the object accurately. Blue dots represent ground truth; orange dots represent detections.
-      </p>
+      <p><strong>At 0 degrees:</strong> the model detected the object accurately. Blue dots represent ground truth; orange dots represent detections.</p>
       <img src="retrolift/zero_deg_rot.png" alt="CenterPose Detection at 0 Degrees">
     
-      <p>
-        <strong>At 90 degrees:</strong> the detection performance dropped significantly, with sparse or missing detections (orange dots).
-      </p>
+      <p><strong>At 90 degrees:</strong> the detection performance dropped significantly, with sparse or missing detections (orange dots).</p>
       <img src="retrolift/ninety_deg_rot.png" alt="CenterPose Detection at 90 Degrees">
-    
     </section>
     
-
-
-
     <section id="isaac">
       <h1>Isaac Sim</h1>
-      <p>
-        Isaac Sim has four related components essential for this project:
-      </p>
+      <p>Isaac Sim has four related components essential for this project:</p>
       <ul>
         <li>Isaac Lab</li>
         <li>Omniverse Launcher</li>
@@ -293,131 +249,87 @@
         <li><strong>Isaac Sim:</strong> Isaac Sim is a specific application of Omniverse for Robotics.</li>
         <li><strong>Isaac Lab:</strong> Isaac Lab is a tool for training. Isaac Lab replaces Isaac Gym (which was also a training environment).</li>
         <li><strong>We build in Isaac Gym and train it on Isaac Lab.</strong></li>
-        <li>Above is a summary of this YouTube video: <a href="https://www.youtube.com/watch?v=_kzW6yBno6Q" target="_blank">Extremely useful video for “how to enable scripting” — not mentioned in the documentation.</a></li>
+        <li>Above is a summary of this YouTube video: <a href="https://www.youtube.com/watch?v=_kzW6yBno6Q" target="_blank">How to enable scripting</a>.</li>
       </ul>
-
-      To arrive at developing the warehouse environment we first need to get familiar with Isaac sim. Here are the steps in the documentation which could help in it:
+    
+      <p>To develop the warehouse environment, we first need to get familiar with Isaac Sim. Here are the steps in the documentation which could help:</p>
       <ul>
         <li>Install the Omniverse Launcher and Isaac Sim.</li>
         <li>Follow the documentation to set up the environment: <a href="https://docs.omniverse.nvidia.com/app_isaacsim/latest/isaac_sim_setup.html" target="_blank">Isaac Sim Setup</a>.</li>
         <li>Learn how to create a simple scene in Isaac Sim: <a href="https://docs.omniverse.nvidia.com/app_isaacsim/latest/tutorials/creating_a_simple_scene.html" target="_blank">Creating a Simple Scene</a>.</li>
         <li>Explore the Isaac Lab documentation for training environments: <a href="https://docs.omniverse.nvidia.com/app_isaacsim/latest/isaac_lab.html" target="_blank">Isaac Lab Documentation</a>.</li>
       </ul>
-
     </section>
-
     
-
-
-
-
-
     <section id="codes">
       <h1>Path Planning in Isaac Sim</h1>
     
       <img src="media/auto_1080p.gif" alt="Autonomous demo" />
       <img src="media/click_pick_place_1080p.gif" alt="Click, pick & place demo" />
     
-
-
-    
-      <h3>Installation Instructions</h3>
+      <h2>Installation Instructions</h2>
       <ol>
-  
         <li>Navigate to the Isaac Sim directory:<br>
           Launch the <code>Omniverse Launcher</code>, under <strong>LIBRARY</strong>, launch <code>Isaac Sim</code>, and click <strong>Open in Terminal</strong>. This will open a terminal in the Isaac Sim directory: <code>~/.local/share/ov/pkg/isaac_sim-2023.1.1</code>.
         </li>
-        <li>Clone this repository into the Isaac Sim directory:<br>
+        <li>Clone this repository:<br>
           <code>git clone https://github.com/mlab-upenn/autonomous_forklift_teleop.git</code>
         </li>
-        <li>In the terminal at the Isaac Sim directory, type <code>code .</code> to launch Visual Studio Code in this directory.<br>
-          In VS Code, open <code>autonomous_teleop.py</code> under <code>ISAAC_SIM-2023.1.1/autonomous_forklift_teleop/</code> and update the <code>PC name/user</code> in <code>MAP_PATH</code> to match your local system.
-        </li>
-        <li>Install <code>opencv-python</code> in the Isaac Sim environment using: (Do not install opencv using sudo apt)<br>
+        <li>In the terminal at the Isaac Sim directory, type <code>code .</code> to launch Visual Studio Code. Open <code>autonomous_teleop.py</code> and update the <code>MAP_PATH</code> to match your system.</li>
+        <li>Install <code>opencv-python</code> in the Isaac Sim environment (do not use <code>sudo apt</code>):<br>
           <code>./python.sh -m pip install opencv-python</code>
         </li>
         <li>Download and unzip the asset file <code>forklift_teleop</code> from 
-          <a href="https://drive.google.com/file/d/1DxOdrLoFRdGp0uXRDlzmdpMpA50Til8i/view?usp=sharing" target="_blank">Google Drive</a>. 
-          Upload the unzipped folder to NUCLEUS at <code>omniverse://localhost/Projects/</code> using the <strong>NUCLEUS</strong> tool in Omniverse Launcher.
+          <a href="https://drive.google.com/file/d/1DxOdrLoFRdGp0uXRDlzmdpMpA50Til8i/view?usp=sharing" target="_blank">Google Drive</a>. Upload the folder to NUCLEUS at <code>omniverse://localhost/Projects/</code>.
         </li>
       </ol>
     
-      <h3>Running the Autonomous Forklift Teleop Demo</h3>
+      <h2>Running the Autonomous Forklift Teleop Demo</h2>
       <ol>
-        <li>Launch <code>Omniverse Launcher</code> and start <code>Isaac Sim</code>. Click <strong>Open in Terminal</strong>, then type <code>code .</code> in the terminal.</li>
-        <li>Open <code>autonomous_teleop.py</code> in Visual Studio Code.</li>
+        <li>Launch <code>Omniverse Launcher</code> and start <code>Isaac Sim</code>. Open Terminal and type <code>code .</code>.</li>
+        <li>Open <code>autonomous_teleop.py</code> in VS Code.</li>
         <li>Run the demo using the <strong>Run and Debug</strong> tab or press <code>F5</code>.</li>
-        <em> Note:</em> If you face an error there are two possible reasons:
-        You are running it in Isaac sim 4.5. This code runs with Isaac Sim 4.2 as there are dependency issues.
-        YOu are not inside the root folder
-        Omniverse has trouble launching. If you fae this follow steps to reolve this in Troubleshooting omniverse issues. 
-              
-        <li>Isaac Sim will launch and load the warehouse scene and top-down map.<br>
-          <em>Note:</em> The first launch may take 5–10 minutes to compile ray tracing shaders. Some non-critical error messages may appear.
-        </li>
-        <li>Switch the camera view from <strong>Perspective</strong> to <strong>bot_left</strong> or any pre-set view. Additional cameras are attached to forklifts for first-person views.</li>
+        <li>Isaac Sim will load the warehouse scene and top-down map. First launch may take 5–10 minutes to compile shaders.</li>
+        <li>Switch camera view from <strong>Perspective</strong> to <strong>bot_left</strong> or any pre-set view. First-person cameras are attached to forklifts.</li>
         <li>By default, the program starts in <strong>Manual mode</strong>:<br>
           Use <code>W, A, S, D</code> to move forklift #2.<br>
           Use <code>E</code> and <code>Q</code> to adjust the fork height.<br>
-          Use <code>C</code> to reset the pose.<br>
-          Use <code>Z</code> to switch to <strong>Autonomous mode</strong>. Five forklifts will begin pre-programmed pallet lift and place sequences. The map will show forklifts' current poses, goal poses, and trajectories.<br>
-          Use <code>X</code> to return to Manual mode.
+          Use <code>C</code> to reset pose.<br>
+          Use <code>Z</code> to switch to <strong>Autonomous mode</strong> (five forklifts begin lift & place sequences). Use <code>X</code> to return to Manual mode.
         </li>
       </ol>
     
-      This is the first thing that you should see if everything was done successfully:
-      <img src="retrolift/stage.png" alt="Isaac Sim" />
-
-
-      <h2>Steps to Debug</h2>
-      
-        <h4>Troubleshooting Omniverse Issues</h4>
-        <ul>
-          <li>Go to NUCLEUS and press on the hamburger icon. There press the uninstall button. </li>
-          <li>Once done,click on add service. Follow the video below. (Please ignore the meeting will end popup)</li>
-        </ul>
-        <!-- add a video below -->
-        <video controls width="640">
-          <source src="retrolift\omniverse_fix.mp4" type="video/mp4">
-        </video>
+      <p>This is the first screen you should see if everything works:</p>
+      <img src="retrolift/stage.png" alt="Isaac Sim Demo Stage" />
     
-        
-
-        <h4>Steps to Resolve Code Execution Problems</h4>
-        <ul>
-          <li>Revert to Isaac Sim version 4.2 if the current version has compatibility issues.</li>
-          <li>Perform a fresh installation of Isaac Sim 4.2 if reverting doesn't resolve the issue.</li>
-          <li>Verify that you are running the code from the root folder of the Isaac Sim directory (e.g., the "retrolifts" folder should be inside the Isaac Sim 4.2 folder).</li>
-        </ul>
-
-
-
-
-
-      <!-- <h2>Map Editor</h2>
-      <p>Refer to the <code>map_editor</code> folder inside the <code>map_editor</code> branch.</p> -->
-
-      <!-- <h3>Running the Data Collection Pipeline for Cameras</h3>
-      <p>Refer to the <code>camera_scripts</code> folder inside the <code>camera_scripts</code> branch.</p>
-      <p>Data from the Raymond SEC visit on 1st May is stored in the home directory of the machine in the folder titled <strong>RetroLifts_05-01</strong>.</p>
-     -->
-
-
-      <h4>Useful Links and Tutorials</h4>
+      <h2>Steps to Debug</h2>
+    
+      <h3>Troubleshooting Omniverse Issues</h3>
+      <ul>
+        <li>Go to NUCLEUS and click the hamburger icon. Click the uninstall button.</li>
+        <li>Click "Add Service" again. Follow the video below (ignore the "meeting will end" popup).</li>
+      </ul>
+      <video controls width="640">
+        <source src="retrolift/omniverse_fix.mp4" type="video/mp4">
+      </video>
+    
+      <h3>Steps to Resolve Code Execution Problems</h3>
+      <ul>
+        <li>Revert to Isaac Sim version 4.2 if compatibility issues occur.</li>
+        <li>Do a fresh install of Isaac Sim 4.2 if reverting doesn’t help.</li>
+        <li>Ensure you’re running from the root folder of Isaac Sim (e.g., "retrolifts" should be inside the Isaac Sim 4.2 folder).</li>
+      </ul>
+    
+      <h3>Useful Links and Tutorials</h3>
       <ul>
         <li><a href="https://docs.omniverse.nvidia.com/isaacsim/latest/features/physics/index.html" target="_blank">NVIDIA Isaac Sim Documentation</a></li>
-        <li><a href="https://docs.omniverse.nvidia.com/isaacsim/latest/replicator_tutorials/tutorial_replicator_getting_started.html?highlight=Semantic#the-semantics-schema-editor" target="_blank">Enable Camera Feed with 2D/3D BBoxes and Semantic Info</a></li>
-        <li><a href="https://docs.omniverse.nvidia.com/isaacsim/latest/features/mapping/ext_omni_isaac_occupancy_map.html" target="_blank">Generate Occupancy Map of the Warehouse Scene</a></li>
+        <li><a href="https://docs.omniverse.nvidia.com/isaacsim/latest/replicator_tutorials/tutorial_replicator_getting_started.html" target="_blank">Enable Camera Feed with BBoxes and Semantic Info</a></li>
+        <li><a href="https://docs.omniverse.nvidia.com/isaacsim/latest/features/mapping/ext_omni_isaac_occupancy_map.html" target="_blank">Generate Occupancy Map</a></li>
         <li><a href="https://docs.omniverse.nvidia.com/isaacsim/latest/features/physics/index.html#" target="_blank">Add Physics to Objects</a></li>
         <li><a href="https://openusd.org/release/api/index.html" target="_blank">USD API Documentation</a></li>
       </ul>
-
-
     </section>
     
-
-
-
 
 
   </main>
